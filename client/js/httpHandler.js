@@ -9,7 +9,7 @@ const getSwimCommand = () => {
     type: 'GET',
     url: `${serverUrl}/messages`,
     success: (res) => {
-      console.log(res);
+      console.log('GET DIRECTION:', res);
       SwimTeam.move(res);
     }
   })
@@ -21,7 +21,7 @@ const postSwimCommand = (direction) => {
     url: `${serverUrl}/commands`,
     data: direction, //REFACTOR
     success: console.log(`Direction ${direction} Posted`)
-    });
+  });
 }
 // setInterval(getSwimCommand, 500);
 /////////////////////////////////////////////////////////////////////
