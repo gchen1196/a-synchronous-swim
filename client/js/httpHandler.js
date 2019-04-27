@@ -7,7 +7,7 @@ const serverUrl = 'http://127.0.0.1:3000';
 const getSwimCommand = () => {
   $.ajax({
     type: 'GET',
-    url: `${serverUrl}/commands`,
+    url: `${serverUrl}/messages`,
     success: (res) => {
       console.log(res);
       SwimTeam.move(res);
