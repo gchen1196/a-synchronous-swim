@@ -14,6 +14,15 @@ const getSwimCommand = () => {
     }
   })
 }
+
+const postSwimCommand = (direction) => {
+  $.ajax({
+    type: 'POST',
+    url: `${serverUrl}/commands`,
+    data: direction, //REFACTOR
+    success: console.log(`Direction ${direction} Posted`)
+    });
+}
 // setInterval(getSwimCommand, 500);
 /////////////////////////////////////////////////////////////////////
 // The ajax file uplaoder is provided for your convenience!
