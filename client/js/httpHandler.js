@@ -15,6 +15,16 @@ const getSwimCommand = () => {
   })
 }
 
+const getBackground = () => {
+  $.ajax({
+    type: 'GET',
+    url: `${serverUrl}/background.jpg`,
+    success: (res) => {
+      console.log(res);
+    }
+  })
+}
+
 const postSwimCommand = (direction) => {
   $.ajax({
     type: 'POST',
@@ -23,7 +33,8 @@ const postSwimCommand = (direction) => {
     success: console.log(`Direction ${direction} Posted`)
   });
 }
-// setInterval(getSwimCommand, 500);
+
+// setInterval(getSwimCommand, 1500);
 /////////////////////////////////////////////////////////////////////
 // The ajax file uplaoder is provided for your convenience!
 // Note: remember to fix the URL below.
@@ -35,7 +46,7 @@ const ajaxFileUplaod = (file) => {
   $.ajax({
     type: 'POST',
     data: formData,
-    url: 'FILL_ME_IN',
+    url: `${serverUrl}/background`,
     cache: false,
     contentType: false,
     processData: false,

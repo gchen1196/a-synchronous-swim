@@ -11,18 +11,29 @@ module.exports.backgroundImageFile = path.join('.', 'background.jpg');
 module.exports.router = (req, res, next = ()=>{}) => {
   
   console.log('Serving request type ' + req.method + ' for url ' + req.url);
-  res.writeHead(200, headers);
   if (req.method === 'GET' && req.url === '/messages') {
-    console.log('shift', shifted);
-    res.end(messageQueue.dequeue());
+    res.writeHead(200, headers);
+    res.write(messageQueue.dequeue());
   }
-  if (req.method === 'POST' && req.url === '/commands') {
+  else if (req.method === 'POST' && req.url === '/commands') {
+    res.writeHead(200, headers);
     req.on('data', chunk => {
       console.log('chunk', chunk.toString());
       messageQueue.enqueue(chunk);
     })
     req.on('end', () => {});
   }
+  else if (req.method === "GET" && req.url === '/background.jpg') {
+    //console.log('path', backgroundImageFile);
+    fs.readFile('./background.jpg', (err, img) => {
+      if (err) throw err;
+      let newImg = multipart.getFile(img);
+      console.log('new image:', img);
+      res.writeHead(200, {'Content-Type': 'image/jpeg'});
+      res.end(img);
+    });
+  }
+  res.end();
 };
 
 // const options = ['left', 'right', 'up', 'down'];
